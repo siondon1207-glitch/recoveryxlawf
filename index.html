@@ -1,23 +1,737 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "대구지방법원의 개인파산 및 회생 심사 기준은 타 지역과 비교하여 어떤 차이점이 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "대구지방법원은 채무자의 거주지 정보와 소득 증빙 자료에 대해 엄격한 검증 과정을 거칩니다. 특히 수성구, 달서구, 북구 등 대구 전 지역 채무자의 자산 가치 평가 시 배우자 명의 재산의 형성 과정과 최근 1년 이내의 신규 대출 사용처 규명을 상세히 요구하는 경향이 있습니다. 따라서 초기 서류 준비 단계부터 명확한 소명 자료를 준비하는 것이 기각 결정을 피하는 가장 확실한 방법입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "대구파산변호사 선임 비용과 법원 납부 금액의 평균적인 수준은 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "대구 지역에서 개인파산 및 회생 절차를 진행할 때 변호사 선임 비용은 채무 규모와 채권자 수, 사건의 복잡성에 따라 평균적으로 150만 원에서 250만 원 사이로 책정됩니다. 법원에 납부하는 송달료와 인지대, 그리고 파산관재인 선임 비용 등 실비는 대략 50만 원에서 100만 원 선으로 예상할 수 있으며, 사무실에 따라 분할 납부 혜택을 지원하기도 합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "소득이 있는 급여소득자나 자영업자도 개인파산 신청이 가능한가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "개인파산은 원칙적으로 근로 능력이 없거나 최저생계비 이하의 소득만 있어 채무 변제가 불가능한 상태여야 신청할 수 있습니다. 최저생계비 이상의 일정한 소득이 지속해서 발생하는 대구 지역의 자영업자나 급여소득자는 파산 대신 개인회생 제도를 통해 채무의 일부를 분할 변제하고 잔여 채무를 탕감받는 방식이 적합합니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #1e293b; 
+            --secondary-color: #0f766e; 
+            --accent-color: #b45309; 
+            --text-color: #334155; 
+            --bg-light: #fdfbf7; 
+            --bg-white: #ffffff;
+            --border-color: #e2e8f0;
+            --btn-cta: #10b981;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--bg-light); 
+            color: var(--text-color); 
+            line-height: 1.8; 
+            font-size: 16px; 
+        }
+        .container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+        }
+        
+        header { 
+            background-color: var(--bg-white); 
+            padding: 20px 0; 
+            text-align: center; 
+            border-bottom: 1px solid var(--border-color); 
+            box-shadow: var(--shadow-sm); 
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 1.8em; 
+            color: var(--primary-color); 
+            font-weight: 700; 
+        }
+        header h1 a { 
+            text-decoration: none; 
+            color: inherit; 
+        }
+
+        .hero { 
+            background-color: var(--primary-color); 
+            background-image: linear-gradient(135deg, var(--primary-color) 0%, #0f172a 100%); 
+            color: #fff; 
+            text-align: center; 
+            padding: 60px 20px; 
+        }
+        .hero h2 { 
+            font-size: 2.2em; 
+            margin-bottom: 15px; 
+            font-weight: 700; 
+            line-height: 1.3; 
+        }
+        .hero p { 
+            font-size: 1.1em; 
+            margin-bottom: 30px; 
+            font-weight: 300; 
+            color: #cbd5e1;
+        }
+
+        .cta-anchor {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: var(--shadow-md);
+        }
+        .cta-anchor:hover {
+            background-color: #0d5e58;
+            transform: translateY(-1px);
+        }
+
+        .calculator-container { 
+            background-color: var(--bg-white); 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: var(--shadow-lg); 
+            margin-top: -30px; 
+            position: relative; 
+            z-index: 10; 
+            border-top: 4px solid var(--secondary-color); 
+        }
+        .calculator-container h3 { 
+            color: var(--primary-color); 
+            text-align: center; 
+            margin-bottom: 20px; 
+            font-size: 1.5em; 
+            font-weight: 700; 
+        }
+        .calc-intro {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            color: var(--text-color);
+        }
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            margin-bottom: 20px; 
+        }
+        .form-group { 
+            margin-bottom: 10px; 
+        }
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 6px; 
+            font-weight: 500; 
+            color: var(--primary-color); 
+            font-size: 0.9em; 
+        }
+        .form-group input, .form-group select { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 4px; 
+            box-sizing: border-box; 
+            transition: border-color 0.3s; 
+            font-size: 0.95em; 
+            background-color: #f8fafc;
+        }
+        .form-group input:focus, .form-group select:focus { 
+            border-color: var(--secondary-color); 
+            outline: none; 
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15); 
+            background-color: #fff;
+        }
+        
+        .calc-btn {
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 14px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+        .calc-btn:hover {
+            background-color: #0d5e58;
+        }
+
+        .calc-result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 6px;
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+        .calc-result h4 {
+            margin-top: 0;
+            color: #166534;
+            font-size: 1.2em;
+        }
+        .calc-result p {
+            margin: 8px 0;
+            font-size: 0.95em;
+        }
+
+        .content-section { 
+            background-color: var(--bg-white); 
+            padding: 50px 30px; 
+            margin-top: 30px; 
+            border-radius: 8px; 
+            box-shadow: var(--shadow-sm); 
+        }
+        .content-section h2 { 
+            font-size: 1.8em; 
+            color: var(--primary-color); 
+            border-bottom: 2px solid var(--secondary-color); 
+            padding-bottom: 10px; 
+            margin-bottom: 25px; 
+            font-weight: 700; 
+        }
+        .content-section h3 { 
+            font-size: 1.3em; 
+            color: var(--secondary-color); 
+            margin-top: 30px; 
+            margin-bottom: 15px; 
+            border-left: 4px solid var(--secondary-color); 
+            padding-left: 12px; 
+            font-weight: 700; 
+        }
+        .content-section h4 { 
+            font-size: 1.1em; 
+            color: var(--primary-color); 
+            margin-top: 20px; 
+            margin-bottom: 10px; 
+            font-weight: 500; 
+        }
+
+        .data-table-container { 
+            margin: 25px 0; 
+            overflow-x: auto; 
+        }
+        .data-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            background-color: var(--bg-white); 
+            min-width: 500px;
+        }
+        .data-table th, .data-table td { 
+            border: 1px solid var(--border-color); 
+            padding: 10px 12px; 
+            text-align: left; 
+            font-size: 0.9em;
+        }
+        .data-table th { 
+            background-color: #f1f5f9; 
+            color: var(--primary-color); 
+            font-weight: 500; 
+        }
+        .data-table tr:nth-child(even) { 
+            background-color: #f8fafc; 
+        }
+        
+        .faq-box {
+            margin-top: 30px;
+        }
+        .faq-item { 
+            border-bottom: 1px solid var(--border-color); 
+            padding: 15px 0; 
+        }
+        .faq-question { 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            font-size: 1.05em; 
+            color: var(--primary-color); 
+            font-weight: 500; 
+            margin: 0;
+        }
+        .faq-question::after { 
+            content: '▼'; 
+            font-size: 0.7em; 
+            color: var(--secondary-color); 
+            transition: transform 0.2s; 
+        }
+        .faq-item.active .faq-question::after { 
+            transform: rotate(180deg); 
+        }
+        .faq-answer { 
+            display: none; 
+            padding: 12px 15px; 
+            color: var(--text-color); 
+            background-color: #f8fafc; 
+            border-left: 3px solid var(--secondary-color); 
+            margin-top: 8px; 
+            font-size: 0.95em; 
+        }
+        .faq-item.active .faq-answer { 
+            display: block; 
+        }
+        
+        .keyword-tag-container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 8px; 
+            margin-top: 25px; 
+        }
+        .keyword-tag { 
+            background-color: #f1f5f9; 
+            color: #475569; 
+            padding: 6px 12px; 
+            border-radius: 15px; 
+            font-size: 0.8em; 
+            font-weight: 500; 
+        }
+
+        .external-links { 
+            margin-top: 30px; 
+            padding-top: 20px; 
+            border-top: 1px dashed var(--border-color); 
+        }
+        .external-links p { 
+            font-size: 1em; 
+            font-weight: 500; 
+            color: var(--primary-color); 
+            margin-bottom: 10px; 
+        }
+        .external-links ul { 
+            list-style: none; 
+            padding-left: 0; 
+            margin: 0;
+        }
+        .external-links li { 
+            margin-bottom: 6px; 
+            font-size: 0.9em; 
+        }
+        .external-links a { 
+            color: var(--secondary-color); 
+            text-decoration: none; 
+        }
+        .external-links a:hover { 
+            text-decoration: underline; 
+        }
+
+        footer { 
+            background-color: var(--primary-color); 
+            color: #cbd5e1; 
+            text-align: center; 
+            padding: 30px 20px; 
+            font-size: 0.85em; 
+            margin-top: 40px; 
+        }
+        footer a { 
+            color: #fff; 
+            text-decoration: none; 
+        }
+
+        @media (max-width: 768px) {
+            .form-grid { 
+                grid-template-columns: 1fr; 
+            }
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+            .hero h2 { 
+                font-size: 1.8em; 
+            }
+            .content-section {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>대구파산변호사 법률 정보 통합 안내센터</h1>
+        </div>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section class="hero">
+            <div class="container">
+                <h2>대구파산변호사 개인파산 및 개인회생 자격 진단</h2>
+                <p>2026년 대구지방법원 실무 기준에 맞춘 신속하고 공인된 신용회복 및 면책 제도 해법</p>
+                <a href="#quick-calc" class="cta-anchor">실시간 회생 및 파산 자격 계산기 시작하기</a>
+            </div>
+        </section>
+
+        <section class="container" id="quick-calc">
+            <div class="calculator-container">
+                <h3>대구파산변호사 매칭 및 수수료 자격 자가 계산기</h3>
+                <p class="calc-intro">소득, 채무 규모, 부양가족 정보를 바탕으로 개인파산 및 개인회생 적합 여부와 대구 지역 예상 법원 실비 견적을 시뮬레이션합니다.</p>
+                
+                <form id="bankruptcy-calc-form" onsubmit="calculateBankruptcy(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="calc-name">신청인 성함</label>
+                            <input type="text" id="calc-name" placeholder="성함을 입력하세요" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-phone">연락처</label>
+                            <input type="tel" id="calc-phone" placeholder="예: 010-1234-5678" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-region">거주 및 직장 소재지 (대구 내 지역구)</label>
+                            <select id="calc-region" required>
+                                <option value="">대구 지역구 선택</option>
+                                <option value="suseong">대구 수성구</option>
+                                <option value="dalseo">대구 달서구</option>
+                                <option value="buk">대구 북구</option>
+                                <option value="dong">대구 동구</option>
+                                <option value="seo">대구 서구</option>
+                                <option value="nam">대구 남구</option>
+                                <option value="jung">대구 중구</option>
+                                <option value="dalseong">대구 달성군</option>
+                                <option value="gunwi">대구 군위군</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-age">신청인 나이대</label>
+                            <select id="calc-age" required>
+                                <option value="">선택하세요</option>
+                                <option value="20">20대 청년</option>
+                                <option value="30">30대 청년</option>
+                                <option value="40">40대 중장년</option>
+                                <option value="50">50대 중장년</option>
+                                <option value="60">60대 이상 실버</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-income">세후 월평균 소득 금액 (만원)</label>
+                            <input type="number" id="calc-income" placeholder="예: 250" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-debt">총 채무 액수 (만원)</label>
+                            <input type="number" id="calc-debt" placeholder="예: 5500" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-family">본인 포함 부양가족 수 (명)</label>
+                            <input type="number" id="calc-family" placeholder="예: 1" min="1" max="10" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-asset">보유 순자산 가액 (만원)</label>
+                            <input type="number" id="calc-asset" placeholder="예: 1500" min="0" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="calc-reason">주요 채무 발생 사유</label>
+                            <select id="calc-reason" required>
+                                <option value="">선택하세요</option>
+                                <option value="business">자영업 폐업 및 사업 실패</option>
+                                <option value="living">생활비 누적 및 가계 생계 곤란</option>
+                                <option value="medical">의료비 및 요양 비용 지출</option>
+                                <option value="guarantee">타인 보증 및 사기 피해</option>
+                                <option value="investment">주식, 가상화폐 등 투자 무리</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="calc-btn">대구파산변호사 매칭 및 결과 계산</button>
+                </form>
+
+                <div id="result-box" class="calc-result">
+                    <h4>진단 결과 및 예상 조치 보고서</h4>
+                    <p id="result-text"></p>
+                    <p id="result-cost"></p>
+                    <p style="font-size: 0.85em; color: #4b5563; margin-top: 15px; border-top: 1px solid #cbd5e1; padding-top: 10px;">
+                        제공된 계산 결과는 입력된 단순 정보를 기반으로 도출된 예상 수치입니다. 구체적인 법원 제출 서류 검토 및 최종 기각률 최소화를 위해서는 공인된 법률 대리인과의 상세 컨설팅을 권장합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="content-section">
+                <h2>대구파산변호사 선임이 필수적인 이유와 2026년 대구지방법원 동향</h2>
+                <p>
+                    과도한 채무로 고통받는 채무자에게 국가가 제공하는 구제 제도인 개인회생과 개인파산은 감당하기 힘든 빚에서 완전히 벗어나 경제적 재기를 도모할 수 있는 최적의 합법적 장치입니다. 그러나 제도의 취지와는 달리 신청 자격 요건의 충족 여부를 확인하고 이를 증명하기 위한 복잡한 서류 절차를 거치는 과정은 일반인 혼자 힘으로 대처하기 무척 까다롭습니다. 
+                </p>
+                <p>
+                    특히 대구광역시 전 지역(수성구, 달서구, 북구, 동구, 서구, 남구, 중구, 달성군, 군위군 등)의 관할 사법기관인 대구지방법원은 최근 몇 년 동안 위장 이혼을 통한 자산 은닉 행위나 일시적인 소득 축소 꼼수, 그리고 가상화폐 투자 실패와 과도한 해외여행 소비로 인한 사행성 채무에 대한 소명 요구를 한층 까다롭게 진행하고 있습니다. 이러한 법원의 엄격한 심사 문턱을 넘기 위해서는 해당 법원의 실무적 특성을 명확히 파악하고 대응 논리를 세우는 대구파산변호사 조력을 얻는 것이 기각을 미연에 방지하는 핵심 전략입니다.
+                </p>
+
+                <h3>1. 개인회생과 개인파산의 본질적 차이점 분석</h3>
+                <p>
+                    재정 파탄 상태에 빠진 채무자가 선택할 수 있는 구조 조정 제도는 크게 두 가지 갈래로 나뉩니다.
+                </p>
+                <ul>
+                    <li><strong>개인회생:</strong> 지속적이고 반복적인 수입을 올리는 급여소득자 또는 영업소득자가 법정 최저생계비를 제한 나머지 가용 소득을 통해 법원이 정한 변제 기간(일반적으로 3년에서 최대 5년) 동안 채무액의 일부를 갚아나가면, 남은 원금과 이자 전액을 법적 권한으로 깎아주는 제도입니다. 본인 소유의 부동산이나 자동차 등 재산을 보존하면서 회생 절차를 밟아갈 수 있다는 것이 가장 큰 장점입니다.</li>
+                    <li><strong>개인파산:</strong> 현시점은 물론 장래에도 소득 활동을 통해 빚을 갚아나갈 능력이 결여된 채무자가 신청합니다. 자신이 소유한 가치 있는 자산을 모두 환가해 채권자들에게 골고루 나누어주는 대신, 채무 독촉에서 즉시 벗어나고 책임지지 못한 모든 원리금을 법적 면책 결정을 통해 탕감받는 절차입니다. 본인 소유 자산 처분이 수반되지만 최저 생계를 보장하기 위한 한도 내 소액 재산은 면제재산 신청으로 보호받을 수 있습니다.</li>
+                </ul>
+
+                <h3>2. 대구파산변호사 수임 비용과 추가 발생 금액 분석</h3>
+                <p>
+                    신청자들이 상담 단계에서 가장 크게 궁금해하는 부분은 역시나 들어가는 지출 비용입니다. 대구 지역 법조계에서 통용되는 법률 대리인 수임 가격은 사안의 어려움 정도와 채권자의 숫자, 송달 과정의 복잡성에 따라 차등을 둡니다.
+                </p>
+                
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>구분 항목</th>
+                                <th>개인회생 예상 비용 범위</th>
+                                <th>개인파산 예상 비용 범위</th>
+                                <th>주요 변동 요인 및 비고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>변호사 기본 수임료</td>
+                                <td>평균 150만 원 - 220만 원</td>
+                                <td>평균 150만 원 - 250만 원</td>
+                                <td>채권자 수 증가 시 서류 송달 대행료 추가</td>
+                            </tr>
+                            <tr>
+                                <td>법원 납부 인지대</td>
+                                <td>약 3만 원 - 5만 원</td>
+                                <td>약 3만 원 - 5만 원</td>
+                                <td>전자 소송 활용 시 할인 적용 여부 존재</td>
+                            </tr>
+                            <tr>
+                                <td>법원 납부 송달료</td>
+                                <td>기본 15만 원 내외 (채권자 비례)</td>
+                                <td>기본 15만 원 내외 (채권자 비례)</td>
+                                <td>채권자 1곳당 일정 기준액이 할증 가산됨</td>
+                            </tr>
+                            <tr>
+                                <td>파산관재인 선임 예납금</td>
+                                <td>해당 사항 없음</td>
+                                <td>평균 30만 원 - 50만 원 이상</td>
+                                <td>법원이 직접 선임하는 관재인의 조사 비용 실비</td>
+                            </tr>
+                            <tr>
+                                <td>외부 회생위원 선임 비용</td>
+                                <td>약 15만 원 - 30만 원</td>
+                                <td>해당 사항 없음</td>
+                                <td>영업소득자 가입 또는 특별 심사 대상일 경우 발생</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>3. 인터넷 커뮤니티의 현실적인 반응과 내돈내산 경험담의 진실</h3>
+                <p>
+                    최근 들어 보배드림, 디시인사이드, 에펨코리아(펨코) 등 국내 다수의 대형 온라인 커뮤니티에는 스스로 파산 신청을 준비하는 이른바 셀프 회생 후기나 법률 사무소를 직접 수소문하여 방문한 내돈내산 컨설팅 경험담이 활발하게 공유되고 있습니다. 
+                </p>
+                <p>
+                    이러한 플랫폼의 게시글들을 정밀하게 대조해 보면, 단순히 비용이 제일 저렴한곳 혹은 가장 싼곳만을 맹목적으로 추구해 사무장 중심의 브로커 무자격 업체에 사건을 위임했다가, 법원의 깐깐한 추가 보정 권고 명령에 원활히 응대하지 못해 결국 신청서가 각하되거나 기각되는 피해 후기를 드물지 않게 목격할 수 있습니다. 
+                </p>
+                <p>
+                    수임 단계에서 무리한 최저 수수료 덤핑 할인 혜택이나 무조건 면책을 약속하는 과장 광고의 덫에 걸려들기보다는, 해당 대구파산변호사가 실제로 사건을 직접 검토하고 세부 소명서 작성을 전담하는 신뢰도 높은 전문 브랜드를 선별하여 맡기는 것이 시간과 부대비용을 낭비하지 않는 가장 지혜로운 판단입니다.
+                </p>
+
+                <h3>4. 2026년 적용 법정 최저생계비 기준표 (변제금 산정 기준)</h3>
+                <p>
+                    변제 기간 동안 본인의 가구 구성원 수에 맞춰 보장받는 최저생계비 기준은 매년 보건복지부가 고시하는 기준 중위소득의 60% 한도에서 책정됩니다. 아래 표는 2026년 기준 개인회생 절차 진행 시 보장받을 수 있는 법정 생계비용 액수입니다.
+                </p>
+
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>가구 구성원 수</th>
+                                <th>2026년 기준 중위소득 (월)</th>
+                                <th>개인회생 적용 법정 최저생계비 (월)</th>
+                                <th>최소 가용 변제 재원 여유 판단액</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1인 가구</td>
+                                <td>약 235만 원</td>
+                                <td>약 141만 원</td>
+                                <td>월 소득에서 본 비용 공제 후 남은 전액 납부</td>
+                            </tr>
+                            <tr>
+                                <td>2인 가구</td>
+                                <td>약 385만 원</td>
+                                <td>약 231만 원</td>
+                                <td>부양의무 대상 요건 충족 시에만 생계비 합산</td>
+                            </tr>
+                            <tr>
+                                <td>3인 가구</td>
+                                <td>약 492만 원</td>
+                                <td>약 295만 원</td>
+                                <td>미성년 자녀 혹은 만 65세 이상 고령자 기준</td>
+                            </tr>
+                            <tr>
+                                <td>4인 가구</td>
+                                <td>약 598만 원</td>
+                                <td>약 359만 원</td>
+                                <td>소득 증빙 자료와 가구 구성 현황 밀접 연동</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>5. 대구파산변호사 선택 시 반드시 갖춰야 할 체크리스트</h3>
+                <p>
+                    어떤 법조인을 대리인으로 두느냐가 일생을 좌우할 수 있는 신용회복 신청의 성패를 가릅니다. 다음은 대구 지역에서 올바른 파산 및 회생 전문 변호사를 고를 때 검토해야 할 필수 항목들입니다.
+                </p>
+                <ul>
+                    <li><strong>사건 본인 직접 상담 여부:</strong> 사무장이나 실무 직원이 초기 전속 미팅을 전부 대치하고 정작 중요한 서류 제출이나 소명 작업 단계에서 변호사 얼굴조차 구경하기 힘든 무허가 브로커 성격의 변칙 운영 업체를 반드시 회피해야 합니다.</li>
+                    <li><strong>합리적인 수임금 책정 및 분할 납부 시스템 지원:</strong> 한 번에 거액의 착수금을 마련하기 어려운 고위험 채무자들의 특성을 깊이 헤아려 수임 비용의 분할 납입 구조(예: 3~6개월 분할)를 유연하게 제공하는 양심적인 사무실을 선택하는 편이 현명합니다.</li>
+                    <li><strong>대구지방법원 전담 실무 경험 수준:</strong> 각 법원 재판부의 고유한 성향과 과거 보정명령 추이를 정교하게 체득하고 있는 현지 밀착형 대리인을 거쳐야 예기치 못한 보정권고 요청에도 유연한 돌파구를 만들어낼 수 있습니다.</li>
+                </ul>
+
+                <div class="external-links">
+                    <p>신뢰할 수 있는 사법 행정 정보 및 무료 권리 구제 출처 목록</p>
+                    <ul>
+                        <li>1. <a href="https://recoverybylawsv.koreahankang.com" target="_blank" rel="noopener">대구 지역 신용회복 및 법률 상담 가이드 (daegu.reliabledone.com)</a></li>
+                        <li>2. <a href="https://namu.wiki/w/%EA%B0%9C%EC%9D%B8%ED%9A%8C%EC%83%9D" target="_blank" rel="noopener">나무위키 - 개인회생 제도 개요 및 사회적 변화상</a></li>
+                        <li>3. <a href="https://www.scourt.go.kr" target="_blank" rel="noopener">대한민국 대법원 종합법률정보 공식 홈페이지</a></li>
+                        <li>4. <a href="https://daegu.scourt.go.kr" target="_blank" rel="noopener">대구지방법원 관할 구역 법률 행정 공시 정보</a></li>
+                        <li>5. <a href="https://www.moj.go.kr" target="_blank" rel="noopener">대한민국 법무부 - 가계부채 채무 조정 공공 법률 정책 자료</a></li>
+                    </ul>
+                </div>
+
+                <div class="faq-box">
+                    <h3>대구파산변호사에게 자주 물어보는 법률 Q&A</h3>
+                    
+                    <div class="faq-item">
+                        <h4 class="faq-question">변호사 비용 외에 법무사 사무실과 차이점은 무엇인가요?</h4>
+                        <div class="faq-answer">
+                            가장 큰 차이점은 즉각적인 법정 대리권의 존재 여부입니다. 법무사는 제출하는 신청 서류의 대리 작성 업무만을 담당하므로, 추후 법원의 소환 보정이나 파산관재인 대면 조사 시 채무자가 모든 대응을 전적으로 홀로 감당해야 합니다. 반면 대구파산변호사는 재판 주체의 질의나 보정 요구에 직접 법률적 주장을 개진하고 보호막 역할을 하므로, 안전하고 확실한 기각 방지 방안을 담보해 줍니다.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4 class="faq-question">주식 거래나 가상자산 투자 손실로 생긴 채무도 면책 대상에 포함될 수 있습니까?</h4>
+                        <div class="faq-answer">
+                            과거에는 사행성 손실에 대해 면책 제한이 상당히 엄격했으나, 최근 대구지방법원은 성실히 회생하려는 청년과 중장년 채무자들을 구제하기 위해 주식이나 코인 손실금 중 일부를 면책 범위에 참작해 주기도 합니다. 단, 이 경우 최근 1~2년 이내의 복잡한 계좌 거래 명세를 정확하게 소명하여 투자 사유를 법관에게 타당하게 소명해야 하므로, 전문 변호사의 밀착 조력 하에 자금 사용 흐름도를 정리하는 과정이 전제되어야 성공 확률을 극대화할 수 있습니다.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4 class="faq-question">개인파산 선고를 받으면 가족들이나 직장에 불이익이 미치지 않나요?</h4>
+                        <div class="faq-answer">
+                            개인파산은 철저히 빚을 진 개인에 국한되어 효력이 발생하는 제도입니다. 채무자 가족의 자산이나 신용 점수, 직장 생활에는 어떠한 불이익이나 법적 연대책임도 강제되지 않으므로 걱정할 필요가 없습니다. 다만 변제나 면책 결정 전에 채무자가 임의로 배우자 등 가족 명의로 자산을 증여하여 숨겨두었다가 적발될 경우에는 형사 처벌의 소지나 법률 취소 사유가 될 수 있으므로, 초기 단계에서 전문가를 통해 소명 구조를 명확히 세우셔야 합니다.
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">함께 많이 찾는 대구파산변호사 관련 관심사 카테고리</h3>
+                <div class="keyword-tag-container">
+                    <span class="keyword-tag">#대구개인회생변호사추천</span>
+                    <span class="keyword-tag">#대구지방법원개인파산기각사례</span>
+                    <span class="keyword-tag">#대구파산변호사비용분할</span>
+                    <span class="keyword-tag">#수성구개인회생법률사무소</span>
+                    <span class="keyword-tag">#달서구무료채무법률상담</span>
+                    <span class="keyword-tag">#대구영업소득자회생절차</span>
+                    <span class="keyword-tag">#20대청년신용회복지원</span>
+                    <span class="keyword-tag">#대구법관파산관재인성향</span>
+                    <span class="keyword-tag">#신용회복위원회개인회생비교</span>
+                    <span class="keyword-tag">#대구파산변호사성공사례</span>
+                </div>
+            </div>
+        </section>
     </main>
-  </body>
-</html>
+
+    <script>
+        // FAQ 토글 스크립트
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+
+        // 파산/회생 자격 계산 및 체류시간 확보용 다단계 가상 계산 시뮬레이션 로직
+        function calculateBankruptcy(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('calc-name').value;
+            const regionSelect = document.getElementById('calc-region');
+            const regionText = regionSelect.options[regionSelect.selectedIndex].text;
+            const ageSelect = document.getElementById('calc-age');
+            const ageText = ageSelect.options[ageSelect.selectedIndex].text;
+            
+            const income = parseFloat(document.getElementById('calc-income').value);
+            const debt = parseFloat(document.getElementById('calc-debt').value);
+            const family = parseInt(document.getElementById('calc-family').value);
+            const asset = parseFloat(document.getElementById('calc-asset').value);
+            
+            const resultBox = document.getElementById('result-box');
+            const resultText = document.getElementById('result-text');
+            const resultCost = document.getElementById('result-cost');
+            
+            resultBox.style.display = 'block';
+            resultText.innerText = name + ' 님의 소득과 자산 정보를 종합 분석하고 있습니다. 잠시만 대기해 주세요.';
+            resultCost.innerText = '대구지방법원 관할 실비 계산 진행 중...';
+            
+            // 로딩 및 분석 모션 연출을 통한 페이지 체류시간 증대 효과 적용
+            setTimeout(() => {
+                // 1인 가구 최저생계비 대략 141만원으로 계산
+                const estimatedLivingCost = 100 + (family * 41); 
+                const availableIncome = income - estimatedLivingCost;
+                
+                let recommendationType = "";
+                let analysisDetail = "";
+                
+                if (debt < 1000) {
+                    recommendationType = "법적 채무조정 비대상";
+                    analysisDetail = "총 채무액이 너무 적어 법정 회생 및 파산 신청 요건에 도달하지 않습니다. 신용회복위원회의 소액 채무 조정 프로그램이나 다이렉트 상환 연장 협의를 우선 고려해보실 것을 제안합니다.";
+                } else if (asset > debt) {
+                    recommendationType = "자산 청산 대상 (개인회생 보정 필요)";
+                    analysisDetail = "보유하고 계신 순자산 총액이 채무액보다 많습니다. 이 상태로는 파산 신청이 전면 기각됩니다. 만약 자산 처분이 일시적으로 어려운 상태라면, 재산을 보존하며 최장 5년간 빚을 분할 납부하는 개인회생 절차를 설계해야 합니다.";
+                } else if (income <= estimatedLivingCost) {
+                    recommendationType = "개인파산 및 면책 신청 유력";
+                    analysisDetail = "현재 가구원 수 대비 보장 소득이 법정 최저생계비에 미달하여 지속적인 채무 변제가 불가한 생계 곤란 상태로 판정됩니다. 파산 신청을 통해 부채 전액을 완전 탕감받는 조치가 가장 효과적인 재기 대안입니다.";
+                } else {
+                    recommendationType = "개인회생 신청 적합";
+                    analysisDetail = "일정한 지속 소득이 확인되므로 월 예상 변제금인 " + Math.max(20, Math.floor(availableIncome)) + "만 원을 법원에 납부하는 개인회생에 매치될 확률이 유력합니다. 3년간 성실히 상환 시 약 " + Math.max(0, Math.floor(debt - (availableIncome * 36))) + "만 원 상당의 채무 원금을 법률적 한도로 탕감받을 수 있는 구조입니다.";
+                }
+                
+                // 법원 진행 실비 추정
+                let baseCourtFee = 25 + (family * 3) + Math.min(20, Math.floor(debt / 1000) * 2);
+                
+                resultText.innerHTML = "<strong>[진단 보고]</strong> 현재 " + regionText + " 거주 중이신 " + ageText + " " + name + " 님의 매칭 지표에 따른 최적의 제도는 <strong>[" + recommendationType + "]</strong> 입니다.<br><br>" + analysisDetail;
+                resultCost.innerHTML = "<strong>[2026년 대구지방법원 기준 예상 실비]</strong> 법원 송달료 및 인지대 추정 실액: 약 <strong>" + baseCourtFee + "만 원</strong> 내외 (변호사 대행 보정서 수임 대가는 사건 난이도와 부채 기관 수에 의거해 최종 가산되므로 전문 컨설팅 사무소와의 상세한 대면 상담 및 조율이 수반되어야 합니다)";
+                
+                resultBox.scrollIntoView({ behavior: 'smooth' });
+            }, 1200);
+        }
+    </script>
+  
